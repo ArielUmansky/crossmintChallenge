@@ -13,9 +13,10 @@ describe('MegaverseChallenge', () => {
     })
 
     test('#passes the goal returns true when executing the current challenge', async () => {
-        expect(await challenge.passesGoal()).toEqual(false)
-        const goal = await api.getGoal()
         let map = (await api.getMap()).content
+
+        // Double checks the state not passes the goal and not passes it in the right way (all null values)
+        expect(await challenge.passesGoal()).toEqual(false)
         expect(map.every(row => row.every(value => value === null))).toEqual(true)
 
         await challenge.executeCurrentGoal()
