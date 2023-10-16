@@ -24,6 +24,10 @@ export class MegaverseApi {
         this.candidateId = candidateId
     }
 
+    shouldGoSlow() {
+        return true
+    }
+
     getGoal() {
         return axios.get(`${this.HOST_URL}/map/${this.candidateId}/goal`)
             .then((response) => {

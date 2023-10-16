@@ -40,7 +40,6 @@ in order to avoid the successive `if` (that could get cumbersome if there're mor
 
 ### Side notes
 
-- At some point I run into several 429 (too many request) errors. In order to workaround it, I used a delay mechanism that I commented away to have the unit tests working from the start
 - I completed and validated the challenge while still implementing refactors, so I couldn't access the map API to figure out goal#2 response structure. I ended up assuming them. I commented accordingly in each place that happened.
 - Integration tests are bypassed because the API stopped responding after completing the challenge.
 

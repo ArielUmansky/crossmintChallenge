@@ -378,6 +378,10 @@ export class MockedMegaverseApi {
         return JSON.parse(JSON.stringify(Array(GOAL.length).fill(Array(GOAL.length).fill(null))))
     }
 
+    shouldGoSlow() {
+        return false
+    }
+
     getGoal() {
         return Promise.resolve(GOAL)
     }

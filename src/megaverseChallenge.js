@@ -22,10 +22,7 @@ export class MegaverseChallenge {
                     //Thw following line is just a simple optimization
                     if(value === MEGAVERSE_CODE_NAMES.SPACE) return
 
-                    // This delay mechanism is a workaround for the "too many request" 429 status errors thrown by the api
-                    // It's commented to allow unit test to run green from the start
-                    //delay++
-                    //setTimeout(async () => {
+                    const processValue = () => {
                         if(value === MEGAVERSE_CODE_NAMES.POLYANET) {
                             createOperations.push(this.megaverseApi.createPolyanet(rowIndex, columnIndex))
                         }
@@ -39,8 +36,17 @@ export class MegaverseChallenge {
                         if(goal[rowIndex][columnIndex].includes(MEGAVERSE_CODE_NAMES.COMETH)) {
                             createOperations.push(this.megaverseApi.createCometh(rowIndex, columnIndex, additionalParam))
                         }
-                    //}, delay * REQUEST_DELAY_MS)
+                    }
 
+                    // This delay mechanism is a workaround for the "too many request" 429 status errors thrown by the api
+                    if(this.megaverseApi.shouldGoSlow()){
+                        delay++
+                        setTimeout(() => {
+                            processValue()
+                        }, delay * REQUEST_DELAY_MS)
+                    } else {
+                        processValue()
+                    }
                 })
             })
 
