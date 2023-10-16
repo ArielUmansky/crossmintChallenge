@@ -22,19 +22,19 @@ On top of that, I **TDD'd** a **mocked version** of the `MegaveseApi`, that runs
 
 I considered a couple of refactors. For example, in the following snippet from the `MegaverseChallenge#executeCurrentGoal` method:
 ```
-    if(value === MEGAVERSE_CODE_NAMES.POLYANET) {
-        createOperations.push(this.megaverseApi.createPolyanet(rowIndex, columnIndex))
-    }
+if(value === MEGAVERSE_CODE_NAMES.POLYANET) {
+    createOperations.push(this.megaverseApi.createPolyanet(rowIndex, columnIndex))
+}
 
-    const additionalParam = value.split('_')[0].toLowerCase()
+const additionalParam = value.split('_')[0].toLowerCase()
 
-    if(value.includes(MEGAVERSE_CODE_NAMES.SALOON)) {
-        createOperations.push(this.megaverseApi.createSaloon(rowIndex, columnIndex, additionalParam))
-    }
+if(value.includes(MEGAVERSE_CODE_NAMES.SALOON)) {
+    createOperations.push(this.megaverseApi.createSaloon(rowIndex, columnIndex, additionalParam))
+}
 
-    if(goal[rowIndex][columnIndex].includes(MEGAVERSE_CODE_NAMES.COMETH)) {
-        createOperations.push(this.megaverseApi.createCometh(rowIndex, columnIndex, additionalParam))
-    }
+if(goal[rowIndex][columnIndex].includes(MEGAVERSE_CODE_NAMES.COMETH)) {
+    createOperations.push(this.megaverseApi.createCometh(rowIndex, columnIndex, additionalParam))
+}
 ``` 
 in order to avoid the successive `if` (that could get cumbersome if there're more types of entities in the future), I could have delegated on specific classes for each type and have some sort of object composition in place. Those classes could also help with the condition in `MegaverseChallenge#passesGoal` method. However, I thought that this approach was a little over-engineered, and since **simplicity** was key, I left it as is. Also, for the size of the challenge, I think is more readable this way. 
 
